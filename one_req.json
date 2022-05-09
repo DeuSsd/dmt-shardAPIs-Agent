@@ -1,0 +1,14 @@
+[
+    {
+        "api": "weather API",
+        "parameters" : {
+            "time":"12/12/12"
+        }
+    },
+    {
+        "api": "COVID API",
+        "parameters" : {
+            "time":"11/11/11"
+        }
+    }
+]
