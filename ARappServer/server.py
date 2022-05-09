@@ -1,7 +1,7 @@
 import socket
 from select import select
 import HandlerRequest
-from Authentification import checkRSA_PrivateKey, WrongRSA_Key
+#from Authentification import checkRSA_PrivateKey, WrongRSA_Key
 #from encryptionDES import WrongDES_Key, checkDES_Key
 import datetime
 
@@ -98,7 +98,7 @@ def event_loop():
 
 
 if __name__ == '__main__':
-    try:
+    #try:
         print("------ Loading the IP configuration ------\n"
               f"Server ip: {HOST}\n"  # Hamachi IP
               # "Lockal ip: {}\n"
@@ -111,6 +111,6 @@ if __name__ == '__main__':
     #except WrongDES_Key as exDES:
     #   print(exDES.message)
     #    pause()
-    except WrongRSA_Key as exRSA:
-        print(exRSA.message)
-        pause()
+    #except WrongRSA_Key as exRSA:
+    #    print(exRSA.message)
+    #    pause()
