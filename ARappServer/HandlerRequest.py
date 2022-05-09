@@ -379,6 +379,9 @@ def responseJSON(data):
     msg = {}
     msg["method"] = "response"
     msg["data"] = data
+    msg=json.dumps(msg, indent=2).encode('utf-8')
+    file_msg = BytesIO(msg)
+    print(msg)
     # ------
     # new
     #msg = ET.Element("message")
@@ -389,30 +392,8 @@ def responseJSON(data):
     #msg = ET.ElementTree(msg)
     #msg = ET.tostring(msg)
     #res=json.dumps(msg)
-    msg=json.dumps(msg, indent=2).encode('utf-8')
     #msg=bytes(msg, 'utf-8')
-    file_msg = BytesIO(msg)
     #msg.write(file_msg, encoding='utf-8', xml_declaration=True)
     #json.dump(msg,file_msg, ensure_ascii=False, indent=4)
     #msg.dump(file_msg, encoding='utf-8')
-    print(msg)
     return file_msg.getvalue()
-#msg={
-#    "method": "getData",
-#    "task_id" : "1123",
-#    "tasks": "test"
-#}
-#msg = ast.literal_eval(msg)
-#methodJSON = msg["method"]
-# print(msg)
-#taskId=msg["task_id"]
-#name_task=msg["tasks"]
-#parametrsMsg = msg["parameters"]
-            # collectionName = parametrsMsg["collectionName"]
-            #collectionName = "users"
-            #login = parametrsMsg["name"]
-            #password_b64 = parametrsMsg["password"]
-            #password = base64.b64decode(password_b64)
-#result = FA.req(taskId, name_task)
-#resultData = result
-#responseJSON(resultData)
