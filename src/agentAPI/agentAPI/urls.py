@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from backed_api.views import RESTAPIView
 
-
+#urlpatterns = [path('admin/', admin.site.urls),path('api/v1/womenlist/', WomenAPIView.as_view())]
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/apis/', RESTAPIView.as_view())
 ]
