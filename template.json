@@ -1,11 +1,32 @@
-
 {
-	"task_id" : "1123123",
+	"request":"get_data",
+    "task_id" : "1123123",
 	"user_id": "2312421",
 	"tasks": [
 		{
 			"api": "weatherAPI",
-			"parametrs" : {}
+			"parameters" : {
+                "date": "12/12/12"
+            }
+		},
+		{
+			"api": "COVID_API",
+			"parameters" : {
+                "date": "11/11/11"
+            }
+		}
+	]
+}
+,
+{
+	"api": [
+		{
+			"api": "weatherAPI",
+			"parametrs" : [
+					{param1: type1},
+					{param2: type2},
+					...
+				]
 		},
 		{
 			"api": "COVID_API",
@@ -13,6 +34,7 @@
 		}
 	]
 }
+
 
 
 
