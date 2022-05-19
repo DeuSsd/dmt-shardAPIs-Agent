@@ -29,7 +29,34 @@ def get_API():
         list_api.append(res[i][0])
     return list_api
 
-#print(get_API())
+def get_web(name_api):
+    conn = sqlite3.connect('web_api.db')
+    cur = conn.cursor()
+    list_api = []
+    cur.execute("SELECT name_api,website FROM web_api;")
+    res = cur.fetchall()
+    for i in range(len(res)):
+        list_api.append(res[i])
+    for i in range(len(list_api)):
+        if list_api[i][0]==name_api:
+            return list_api[i][1]
+    return 'no data'
+
+def from_web_to_api(name_web):
+    conn = sqlite3.connect('web_api.db')
+    cur = conn.cursor()
+    list_api = []
+    cur.execute("SELECT name_api,website FROM web_api;")
+    res = cur.fetchall()
+    for i in range(len(res)):
+        list_api.append(res[i])
+    for i in range(len(list_api)):
+        if list_api[i][1]==name_web:
+            return list_api[i][0]
+    return 'no data'
+
+
+#print(get_web('weather_API'))
 
 
 def get_param(id_api):
@@ -44,5 +71,5 @@ def get_param(id_api):
         #print(res[i][0]+": "+res[i][1])
 
     return list_param
-a=get_param(2)
-print(a)
+#a=get_param(2)
+#print(a)
