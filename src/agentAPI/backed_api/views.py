@@ -10,7 +10,7 @@ from .serializer import APISerializer
 
 class RESTAPIView(APIView):
     def get(self, request):
-        print(request.data)
+        #print(request.data)
         if request.data == {}:
             return Response({'title': 'GO OUT!!!'})  # для вызова из браузера
         if request.data['request']=='get_api':
@@ -20,7 +20,8 @@ class RESTAPIView(APIView):
                 res=connect_with_sql.get_param(i+1)
                 api={'api': apis[i],'parameters':res}
                 list_api_param.append(api)
-            return Response(list_api_param)
+            print(list_api_param)
+            return Response({'apis':list_api_param})
         if request.data['request']=='get_data':
             list_res=[]
             task_id = request.data['task_id']
@@ -41,9 +42,3 @@ class RESTAPIView(APIView):
             cat_id=request.data['cat_id']
         )
         return Response({'post': model_to_dict(post_new)})
-
-
-
-#class WomenAPIView(generics.ListAPIView):
-#    queryset = Women.objects.all()
-#    serializer_class = WomenSerializer
