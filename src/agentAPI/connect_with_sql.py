@@ -3,21 +3,39 @@ conn = sqlite3.connect('web_api.db')
 cur = conn.cursor()
 import json
 
-#cur.execute("""CREATE TABLE IF NOT EXISTS web_api(api_id INT PRIMARY KEY,name_api TEXT,website TEXT);""")
+#cur.execute("""CREATE TABLE IF NOT EXISTS web_api(api_id INT PRIMARY KEY,name_api TEXT,website TEXT, title TEXT, description TEXT);""")
+#cur.execute('DROP table if exists param_api')
+#conn.commit()
+#cur.execute('DROP table if exists param_api')
+#cur.execute("""DELETE from web_api where api_id = 1""")
+#conn.commit()
 #conn.commit()
 
-#cur.execute("""CREATE TABLE IF NOT EXISTS param_api(id INT PRIMARY KEY,api_id INT,parameters_api TEXT,type_parameters TEXT);""")
+#cur.execute("""CREATE TABLE IF NOT EXISTS param_api(id INT PRIMARY KEY,api_id INT,parameters_api TEXT, title_param TEXT,type_parameters TEXT, description TEXT);""")
+#conn.commit()
+#api1 = ('1', 'weather_API', 'https://visual-crossing-weather.p.rapidapi.com/history', 'ПОГОДА','Позволяет собрать данные по погоде в разных городах')
+#api_par_1=('1','1','start_time','Время начала','time','Параметр, отвечающий за начало выборки')
+#api_par_2=('2','1','end_time','Время конца','time','Параметр, отвечающий за конец выборки')
+#api_par_3=('3','1','location','Местность','string','Параметр, отвечающий за местность выборки')
+#api2 = ('2', 'covid_API', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ','Статистика Ковид','Позволяет собрать данные по ковиду в разных городах')
+#api2_par_1=('4','2','start_time','Время начала','time','Параметр, отвечающий за начало выборки')
+#api2_par_2=('5','2','end_time','Время конца','time','Параметр, отвечающий за конец выборки')
+#api2_par_3=('6','2','location','Местность','string','Параметр, отвечающий за местность выборки')
+#cur.execute("INSERT INTO web_api VALUES(?, ?, ?,?,?);", api1)
+#cur.execute("INSERT INTO param_api VALUES(?, ?, ?, ?,?,?);", api_par_1)
+#cur.execute("INSERT INTO param_api VALUES(?, ?, ?, ?,?,?);", api_par_2)
+#cur.execute("INSERT INTO param_api VALUES(?, ?, ?, ?,?,?);", api_par_3)
+#cur.execute("INSERT INTO web_api VALUES(?, ?, ?,?,?);", api2)
+#cur.execute("INSERT INTO param_api VALUES(?, ?, ?, ?,?,?);", api2_par_1)
+#cur.execute("INSERT INTO param_api VALUES(?, ?, ?, ?,?,?);", api2_par_2)
+#cur.execute("INSERT INTO param_api VALUES(?, ?, ?, ?,?,?);", api2_par_3)
 #conn.commit()
 
-#api1 = ('2', 'COVIDAPI', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-#api_par_1=('4','2','start_time','time')
-#api_par_2=('5','2','end_time','time')
-#api_par_3=('6','2','location','string')
-#cur.execute("INSERT INTO web_api VALUES(?, ?, ?);", api1)
-#cur.execute("INSERT INTO param_api VALUES(?, ?, ?, ?);", api_par_1)
-#cur.execute("INSERT INTO param_api VALUES(?, ?, ?, ?);", api_par_2)
-#cur.execute("INSERT INTO param_api VALUES(?, ?, ?, ?);", api_par_3)
-#conn.commit()
+#cur.execute('SELECT * FROM web_api')
+#print(cur.fetchall())
+
+#cur.execute('SELECT * FROM param_api')
+#print(cur.fetchall())
 
 def get_API():
     conn = sqlite3.connect('web_api.db')
@@ -28,6 +46,15 @@ def get_API():
     for i in range(len(res)):
         list_api.append(res[i][0])
     return list_api
+
+def get_title(id):
+    conn = sqlite3.connect('web_api.db')
+    cur = conn.cursor()
+    cur.execute("""SELECT title, description FROM web_api
+            WHERE api_id=?;""", (str(id)))
+    res = cur.fetchall()
+    #print(res)
+    return res
 
 def get_web(name_api):
     conn = sqlite3.connect('web_api.db')
@@ -56,20 +83,15 @@ def from_web_to_api(name_web):
     return 'no data'
 
 
-#print(get_web('weather_API'))
-
-
 def get_param(id_api):
     conn = sqlite3.connect('web_api.db')
     cur = conn.cursor()
-    cur.execute("""SELECT parameters_api, type_parameters FROM param_api
+    cur.execute("""SELECT title_param, parameters_api, type_parameters, description FROM param_api
         WHERE api_id=?;""", (str(id_api)))
     res = cur.fetchall()
     list_param=[]
     for i in range(len(res)):
-        list_param.append({'param': res[i][0], 'type':res[i][1]})
+        list_param.append({'title_parameter':res[i][0],'parameter': res[i][1], 'type':res[i][2],'description_parameter':res[i][3]})
         #print(res[i][0]+": "+res[i][1])
 
     return list_param
-#a=get_param(2)
-#print(a)

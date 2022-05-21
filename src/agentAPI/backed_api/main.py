@@ -10,9 +10,16 @@ def req(name,parameters):
 def one_task(task):
     web=task['website']
     param=task['parameters']
-    date=param['date']
-    res=date+str(' done')
-    return {'web': web, 'parameters': {'date': date, 'data': res}}
+    list_param=[]
+    for i in range(len(param)):
+        one_param=param[i]
+        parameter=one_param['parameter']
+        type=one_param['type']
+        value=one_param['value']
+        values=[{'value':value},{'value':value}]
+        list_param.append({'parameter_name': parameter,'type': type,'values':values})
+
+    return {'web': web, 'parameters': list_param}
 
 def get_web_from_name(task):
     api=task['api']

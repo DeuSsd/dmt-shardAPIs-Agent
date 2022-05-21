@@ -10,34 +10,43 @@ from .serializer import APISerializer
 
 class RESTAPIView(APIView):
     def get(self, request):
-        #print(request.data)
         if request.data == {}:
             return Response({'title': 'GO OUT!!!'})  # для вызова из браузера
-        if request.data['request']=='get_api':
-            list_api_param=[]
-            apis=connect_with_sql.get_API()
+        if request.data['request']=='get_all_api':
+            list_api_param = []
+            apis = connect_with_sql.get_API()
             for i in range(len(apis)):
-                res=connect_with_sql.get_param(i+1)
-                api={'api': apis[i],'parameters':res}
+                res = connect_with_sql.get_title(i + 1)
+                #print(res)
+                api = {'title': res[0][0],'api': apis[i], 'description': res[0][1]}
                 list_api_param.append(api)
-            print(list_api_param)
-            return Response({'apis':list_api_param})
+            return Response({'apis': list_api_param})
+
+        if request.data['request'] == 'get_some_parameters':
+            task_id = request.data['task_id']
+            user_id = request.data['user_id']
+            some_api = request.data['APIs']
+            list_api_param=[]
+            for i in range(len(some_api)):
+                param =connect_with_sql.get_param(i + 1)
+                title = connect_with_sql.get_title(i + 1)
+                api={'title': title[0][0],'api': some_api[i],'description': title[0][1], 'parameters':param}
+                list_api_param.append(api)
+            return Response({'task_id':task_id,'user_id':user_id,'tasks':list_api_param})
+
         if request.data['request']=='get_data':
             list_res=[]
             task_id = request.data['task_id']
-            user_id = request.data['user_id']
+            #user_id = request.data['user_id']
             tasks = request.data['tasks']
             for k in range(len(tasks)):
                 res=get_web_from_name(tasks[k])#получил ссылку на отдельный АПИ
                 request_to_anton=one_task(res)#это я отправляю Антону JSON с ссылкой и параметрами и получаю от него ответ
                 web_api=connect_with_sql.from_web_to_api(request_to_anton['web'])#заменяю в ответе Антона ссылку на название АПИ
-                #print(web_api)
-                #print(request_to_anton)
-                request_to_user={'api': web_api,'parameters':request_to_anton['parameters']}#формирую ответ из названия АПИ и его данных
+                request_to_user={'api': web_api,'data':[request_to_anton['parameters']]}#формирую ответ из названия АПИ и его данных
                 list_res.append(request_to_user)
 
-            #return Response(list_res)
-            return Response({'task_id':task_id,'user_id': user_id, 'tasks':list_res})
+            return Response({'task_id':task_id,'task_data':list_res})
 
 
     def post(self, request):

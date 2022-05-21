@@ -18,3 +18,19 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class APIWEB(models.Model):
+    name_api = models.CharField(max_length=100)
+    web_api = models.CharField(max_length=255)
+    title_api = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name_api
+
+class APIparameters(models.Model):
+    id_api=models.ForeignKey('APIWEB', on_delete=models.CASCADE)
+    #id_api = models.Foreignkey('APIWEB', on_delete=models.CASCADE)
+    parameter_api = models.CharField(max_length=255)
+    type_parameter = models.CharField(max_length=100)
+    def __str__(self):
+        return self.parameter_api
