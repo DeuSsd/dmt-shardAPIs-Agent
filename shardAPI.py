@@ -9,7 +9,6 @@ class shardAPI():
         self.config["rapid_key"] = task.get("X-RapidAPI-Key")
         self.params = task.get("parameters")
         self.api = task.get("api")
-        self.execute()
 
     def execute(self):
         module = __import__(self.api)
@@ -22,6 +21,7 @@ class shardAPI():
         self.result = json.dumps(result_dict)
 
     def get(self):
+        self.execute()
         return self.result
 
 
