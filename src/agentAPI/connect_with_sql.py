@@ -34,33 +34,33 @@ import json
 #cur.execute('SELECT * FROM web_api')
 #print(cur.fetchall())
 
-#cur.execute('SELECT * FROM param_api')
-#print(cur.fetchall())
+cur.execute('SELECT * FROM param_api')
+print(cur.fetchall())
 
 def get_API():
-    conn = sqlite3.connect('web_api.db')
+    conn = sqlite3.connect('db.sqlite3')
     cur = conn.cursor()
     list_api=[]
-    cur.execute("SELECT name_api FROM web_api;")
+    cur.execute("SELECT name_api FROM backed_api_apiweb;")
     res=cur.fetchall()
     for i in range(len(res)):
         list_api.append(res[i][0])
     return list_api
 
 def get_title(id):
-    conn = sqlite3.connect('web_api.db')
+    conn = sqlite3.connect('db.sqlite3')
     cur = conn.cursor()
-    cur.execute("""SELECT title, description FROM web_api
-            WHERE api_id=?;""", (str(id)))
+    cur.execute("""SELECT title_api, description FROM backed_api_apiweb
+            WHERE id=?;""", (str(id)))
     res = cur.fetchall()
     #print(res)
     return res
 
 def get_web(name_api):
-    conn = sqlite3.connect('web_api.db')
+    conn = sqlite3.connect('db.sqlite3')
     cur = conn.cursor()
     list_api = []
-    cur.execute("SELECT name_api,website FROM web_api;")
+    cur.execute("SELECT name_api,web_api FROM backed_api_apiweb;")
     res = cur.fetchall()
     for i in range(len(res)):
         list_api.append(res[i])
@@ -70,10 +70,10 @@ def get_web(name_api):
     return 'no data'
 
 def from_web_to_api(name_web):
-    conn = sqlite3.connect('web_api.db')
+    conn = sqlite3.connect('db.sqlite3')
     cur = conn.cursor()
     list_api = []
-    cur.execute("SELECT name_api,website FROM web_api;")
+    cur.execute("SELECT name_api,web_api FROM backed_api_apiweb;")
     res = cur.fetchall()
     for i in range(len(res)):
         list_api.append(res[i])
@@ -84,10 +84,10 @@ def from_web_to_api(name_web):
 
 
 def get_param(id_api):
-    conn = sqlite3.connect('web_api.db')
+    conn = sqlite3.connect('db.sqlite3')
     cur = conn.cursor()
-    cur.execute("""SELECT title_param, parameters_api, type_parameters, description FROM param_api
-        WHERE api_id=?;""", (str(id_api)))
+    cur.execute("""SELECT title_parameter, parameter_api, type_parameter, description_parameter FROM backed_api_parameters
+        WHERE id_api_id=?;""", (str(id_api)))
     res = cur.fetchall()
     list_param=[]
     for i in range(len(res)):

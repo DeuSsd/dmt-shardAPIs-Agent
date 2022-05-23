@@ -18,7 +18,6 @@ def one_task(task):
         value=one_param['value']
         values=[{'value':value},{'value':value}]
         list_param.append({'parameter_name': parameter,'type': type,'values':values})
-
     return {'web': web, 'parameters': list_param}
 
 def get_web_from_name(task):

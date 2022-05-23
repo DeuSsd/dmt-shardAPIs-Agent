@@ -3,7 +3,8 @@ from rest_framework import generics
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import APIData
+#from .models import APIData
+from .models import APIWEB
 from .main import one_task, get_web_from_name
 import connect_with_sql
 from .serializer import APISerializer
@@ -30,14 +31,16 @@ class RESTAPIView(APIView):
             for i in range(len(some_api)):
                 param =connect_with_sql.get_param(i + 1)
                 title = connect_with_sql.get_title(i + 1)
-                api={'title': title[0][0],'api': some_api[i],'description': title[0][1], 'parameters':param}
+                api={'title': title[0][0],'api': some_api[i],'description': title[0][1]}
+                api={'api':api,'parameters':param}
+                #parameter={'parameters':param}
                 list_api_param.append(api)
             return Response({'task_id':task_id,'user_id':user_id,'tasks':list_api_param})
 
         if request.data['request']=='get_data':
             list_res=[]
             task_id = request.data['task_id']
-            #user_id = request.data['user_id']
+            user_id = request.data['user_id']
             tasks = request.data['tasks']
             for k in range(len(tasks)):
                 res=get_web_from_name(tasks[k])#получил ссылку на отдельный АПИ
@@ -46,11 +49,10 @@ class RESTAPIView(APIView):
                 request_to_user={'api': web_api,'data':[request_to_anton['parameters']]}#формирую ответ из названия АПИ и его данных
                 list_res.append(request_to_user)
 
-            return Response({'task_id':task_id,'task_data':list_res})
-
+            return Response({'task_id':task_id, 'user_id': user_id,'task_data':list_res})
 
     def post(self, request):
-        post_new=APIData.objects.create(
+        post_new=APIWEB.objects.create(
             title=request.data['title'],
             content=request.data['content'],
             cat_id=request.data['cat_id']
