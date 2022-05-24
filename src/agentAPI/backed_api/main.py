@@ -23,8 +23,10 @@ def one_task(task):
 def get_web_from_name(task):
     api=task['api']
     web=connect_with_sql.get_web(api)
+    x_host=connect_with_sql.get_xhost(api)
+    x_key=connect_with_sql.get_xkey(api)
     param=task['parameters']
-    return {'website': web, 'parameters': param}
+    return {'api': api, 'website': web, "X-RapidAPI-Host": x_host, "X-RapidAPI-Key": x_key,'parameters': param}
 
 def get_name_from_web(task):
     api=task['web']

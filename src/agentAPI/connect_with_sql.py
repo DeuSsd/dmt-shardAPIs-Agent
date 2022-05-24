@@ -91,7 +91,35 @@ def get_param(id_api):
     res = cur.fetchall()
     list_param=[]
     for i in range(len(res)):
-        list_param.append({'title_parameter':res[i][0],'parameter': res[i][1], 'type':res[i][2],'description_parameter':res[i][3]})
+        list_param.append({'title_parameter':res[i][0],'parameter': res[i][1], 'type':res[i][2],'description_parameters':res[i][3]})
         #print(res[i][0]+": "+res[i][1])
 
     return list_param
+
+
+def get_xhost(name_api):
+    conn = sqlite3.connect('db.sqlite3')
+    cur = conn.cursor()
+    list_api = []
+    cur.execute("SELECT name_api,X_RapidAPI_Host FROM backed_api_apiweb;")
+    res = cur.fetchall()
+    for i in range(len(res)):
+        list_api.append(res[i])
+    for i in range(len(list_api)):
+        if list_api[i][0]==name_api:
+            return list_api[i][1]
+    return 'no data'
+
+def get_xkey(name_api):
+    conn = sqlite3.connect('db.sqlite3')
+    cur = conn.cursor()
+    list_api = []
+    cur.execute("SELECT name_api,X_RapidAPI_Key FROM backed_api_apiweb;")
+    res = cur.fetchall()
+    for i in range(len(res)):
+        list_api.append(res[i])
+    for i in range(len(list_api)):
+        if list_api[i][0]==name_api:
+            return list_api[i][1]
+    return 'no data'
+

@@ -25,6 +25,8 @@ class APIWEB(models.Model):
     web_api = models.CharField(max_length=255)
     title_api = models.CharField(max_length=100)
     description = models.CharField(max_length=255, default=' ')
+    X_RapidAPI_Host = models.CharField(max_length=255, default=' ')
+    X_RapidAPI_Key = models.CharField(max_length=255, default=' ')
     def __str__(self):
         return self.name_api
 

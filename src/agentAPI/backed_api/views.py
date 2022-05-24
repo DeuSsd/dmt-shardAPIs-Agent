@@ -44,8 +44,10 @@ class RESTAPIView3(APIView):
         tasks = request.data['insides']
         for k in range(len(tasks)):
             res = get_web_from_name(tasks[k])  # получил ссылку на отдельный АПИ
-            request_to_anton = one_task(res)  # это я отправляю Антону JSON с ссылкой и параметрами и получаю от него ответ
-            web_api = connect_with_sql.from_web_to_api(request_to_anton['web'])  # заменяю в ответе Антона ссылку на название АПИ
-            request_to_user = {'api': web_api,'data': [request_to_anton['parameters']]}  # формирую ответ из названия АПИ и его данных
-            list_res.append(request_to_user)
+            print('**********')
+            print(res)
+            request_to_shardAPI = one_task(res)  # это я отправляю Антону JSON с ссылкой и параметрами и получаю от него ответ
+            web_api = connect_with_sql.from_web_to_api(request_to_shardAPI['web'])  # заменяю в ответе Антона ссылку на название АПИ
+            response_to_user = {'api': web_api,'data': [request_to_shardAPI['parameters']]}  # формирую ответ из названия АПИ и его данных
+            list_res.append(response_to_user)
         return Response({'task_id': task_id, 'user_id': user_id, 'insides': list_res})
