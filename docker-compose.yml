@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  web:
+    image: quteas/dmt-agent-api   
+    command: bash -c "ls && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    container_name: webserveragentapi
+    ports:
+      - "8000:8000"
