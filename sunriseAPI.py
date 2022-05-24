@@ -25,8 +25,7 @@ class sunriseAPI():
             self.querystring = {"date":str(init_date),"latitude":self.latitude,"longitude":self.longitude}
             self.response = requests.request("GET", self.website, headers=self.headers, params=self.querystring)
             self.response = json.loads(self.response.text)
-            init_date = init_date.strftime('%d-%m-%Y')
-            self.date.append(str(init_date))
+            self.date.append(str(init_date.strftime('%d-%m-%Y')))
             self.value.append(self.response.get("sunrise")[11:16])
             init_date += timedelta(days = 1)
             time.sleep(1)
