@@ -24,7 +24,7 @@ class temperatureAPI():
         self.date, self.value = [], []
         for day in self.values:
             day_date = datetime.fromtimestamp(day.get('datetime') / 1000)
-            self.date.append(day_date.strftime("%m-%d-%Y"))
+            self.date.append(day_date.strftime("%d-%m-%Y"))
             self.value.append(day.get('temp'))
 
         return self.date, self.value
