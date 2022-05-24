@@ -115,8 +115,8 @@ test_api_sunset={
     ]
 }
 # shard_moscow_weather = shardAPI(test_api_weather).get()
-shard_moscow_humidity = shardAPI(test_api_humidity).get()
+shard_moscow_temperature = shardAPI(test_api_temperature).get()
 
 
 
-print(shard_moscow_humidity)
+print(shard_moscow_temperature)
