@@ -7,8 +7,10 @@ def change_date(date):
 
 class temperatureAPI():
     def __init__(self, params, config):
-        self.start_time = change_date(params[0].get("value")) + "T00:00:00"
-        self.end_time = change_date(params[1].get("value")) + "T00:00:00"
+        # self.start_time = change_date(params[0].get("value")) + "T00:00:00"
+        # self.end_time = change_date(params[1].get("value")) + "T00:00:00"
+        self.start_time = params[0].get("value") + "T00:00:00"
+        self.end_time = params[1].get("value") + "T00:00:00"
         self.location = params[2].get("value")
 
         self.querystring = {"startDateTime": self.start_time, "aggregateHours": "24", "location": self.location,

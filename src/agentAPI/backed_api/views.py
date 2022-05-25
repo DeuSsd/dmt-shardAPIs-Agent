@@ -14,6 +14,7 @@ from .serializer import APISerializer
 
 class RESTAPIView(APIView):
     def get(self, request):
+        print(request.data)
         list_api_param = []
         apis = connect_with_sql.get_API()
         for i in range(len(apis)):
@@ -26,6 +27,7 @@ class RESTAPIView(APIView):
 
 class RESTAPIView2(APIView):
     def post(self, request):
+        print(request.data)
         task_id = request.data['task_id']
         user_id = request.data['user_id']
         some_api = request.data['insides']
@@ -45,6 +47,7 @@ class RESTAPIView2(APIView):
 
 class RESTAPIView3(APIView):
     def post(self, request):
+        print(request.data)
         list_res = []
         task_id = request.data['task_id']
         user_id = request.data['user_id']
