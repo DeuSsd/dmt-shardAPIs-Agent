@@ -52,7 +52,7 @@ class RESTAPIView3(APIView):
             #web_api = connect_with_sql.from_web_to_api(request_to_shardAPI['web'])  # заменяю в ответе Антона ссылку на название АПИ
             #print('**********')
             #print(request_to_shardAPI['api'])
-            response_to_user = {'api': request_to_shardAPI['api'],'data': [request_to_shardAPI['parameters']]}  # формирую ответ из названия АПИ и его данных
+            response_to_user = {'api': request_to_shardAPI['api'],'data': request_to_shardAPI['parameters']}  # формирую ответ из названия АПИ и его данных
             list_res.append(response_to_user)
             ff = {'task_id': task_id, 'user_id': user_id, 'insides': list_res}
         return Response(json.dumps(ff), content_type="application/json")

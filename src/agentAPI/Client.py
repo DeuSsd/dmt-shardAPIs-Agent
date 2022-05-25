@@ -13,9 +13,9 @@ def one_task(test_api):
     list_values=[]
     #print(type(req['value'][1]))
     for i in range(len(req_date)):
-        res_date={'id':i+1, 'value': req['date'][i]}
+        res_date={'id':i+1, 'value': str(req['date'][i])}
         list_date.append(res_date)
-        res_values={'id':i+1, 'value':req['value'][i]}
+        res_values={'id':i+1, 'value':str(req['value'][i])}
         list_values.append(res_values)
     finish_response1={'parameter_name': 'current_time', 'type':'date','values': list_date}
     finish_response2={'parameter_name': 'data', 'type': type_val,'values': list_values}
