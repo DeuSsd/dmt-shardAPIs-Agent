@@ -7,6 +7,10 @@ def change_date(date):
 
 class temperatureAPI():
     def __init__(self, params, config):
+        
+        print(f"\033[3m\033[35m{params}\033[0m")
+        params = {item["parameter"]: item for item in params}
+        print(f"\033[3m\033[33m{params}\033[0m")
         # self.start_time = change_date(params[0].get("value")) + "T00:00:00"
         # self.end_time = change_date(params[1].get("value")) + "T00:00:00"
         self.start_time = params[0].get("value") + "T00:00:00"

@@ -10,9 +10,13 @@ class humidityAPI():
     def __init__(self, params, config):
         # self.start_time = change_date(params[0].get("value")) + "T00:00:00"
         # self.end_time = change_date(params[1].get("value")) + "T00:00:00"
-        self.start_time = params[0].get("value") + "T00:00:00"
-        self.end_time = params[1].get("value") + "T00:00:00"
-        self.location = params[2].get("value")
+        print(f"\033[3m\033[35m{params}\033[0m")
+        params = {item["parameter"]: item for item in params}
+        print(f"\033[3m\033[33m{params}\033[0m")
+        
+        self.start_time = params.get("start_time").get("value") + "T00:00:00"
+        self.end_time = params.get("end_time").get("value") + "T00:00:00"
+        self.location = params.get("location").get("value")
 
         self.querystring = {"startDateTime": self.start_time, "aggregateHours": "24", "location": self.location,
                        "endDateTime": self.end_time,

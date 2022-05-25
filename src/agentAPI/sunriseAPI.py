@@ -10,10 +10,14 @@ class sunriseAPI():
     def __init__(self, params, config):
         # self.start_time = datetime.strptime(change_date(params[0].get("value")), '%Y-%M-%d').date()
         # self.end_time = datetime.strptime(change_date(params[1].get("value")), '%Y-%M-%d').date()
-        self.start_time = datetime.strptime(params[0].get("value"), '%Y-%M-%d').date()
-        self.end_time = datetime.strptime(params[1].get("value"), '%Y-%M-%d').date()
-        self.latitude = params[2].get("value")
-        self.longitude = params[3].get("value")
+        print(f"\033[3m\033[35m{params}\033[0m")
+        params = {item["parameter"]: item for item in params}
+        print(f"\033[3m\033[33m{params}\033[0m")
+        
+        self.start_time = datetime.strptime(params.get("start_time").get("value"), '%Y-%M-%d').date()
+        self.end_time = datetime.strptime(params.get("end_time").get("value"), '%Y-%M-%d').date()
+        self.latitude = params.get("latitude").get("value")
+        self.longitude = params.get("longitude").get("value")
         self.website = config.get("website")
 
 
