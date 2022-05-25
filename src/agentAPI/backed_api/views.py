@@ -14,18 +14,19 @@ from .serializer import APISerializer
 
 class RESTAPIView(APIView):
     def get(self, request):
+        print(request.data)
         list_api_param = []
         apis = connect_with_sql.get_API()
         for i in range(len(apis)):
             res = connect_with_sql.get_title(i + 1)
             api = {'title': res[0][0],'api': apis[i], 'description': res[0][1]}
             list_api_param.append(api)
-            ff = {'apis': list_api_param}
-        return Response(json.dumps(ff), content_type="application/json")
+        return Response({'apis': list_api_param})
 
 
 class RESTAPIView2(APIView):
     def post(self, request):
+        print(request.data)
         task_id = request.data['task_id']
         user_id = request.data['user_id']
         some_api = request.data['insides']
@@ -37,11 +38,11 @@ class RESTAPIView2(APIView):
             api = {'api': api, 'parameters': param}
             # parameter={'parameters':param}
             list_api_param.append(api)
-            ff = {'task_id': task_id, 'user_id': user_id, 'insides': list_api_param}
-        return Response(json.dumps(ff), content_type="application/json")
+        return Response({'task_id': task_id, 'user_id': user_id, 'insides': list_api_param})
 
 class RESTAPIView3(APIView):
     def post(self, request):
+        print(request.data)
         list_res = []
         task_id = request.data['task_id']
         user_id = request.data['user_id']
@@ -54,5 +55,4 @@ class RESTAPIView3(APIView):
             #print(request_to_shardAPI['api'])
             response_to_user = {'api': request_to_shardAPI['api'],'data': request_to_shardAPI['parameters']}  # формирую ответ из названия АПИ и его данных
             list_res.append(response_to_user)
-            ff = {'task_id': task_id, 'user_id': user_id, 'insides': list_res}
-        return Response(json.dumps(ff), content_type="application/json")
+        return Response({'task_id': task_id, 'user_id': user_id, 'insides': list_res})

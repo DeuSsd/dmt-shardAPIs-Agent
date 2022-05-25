@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-s$5sa2)m66swoo5ea+&#3%^k!(&*lh+f_kke___ro4byd2$j3a
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'webserveragentapi'
+    'webserveragentapi',
+    'localhost'
 ]
 
 
