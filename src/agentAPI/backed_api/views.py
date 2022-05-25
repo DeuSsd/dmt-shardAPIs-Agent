@@ -21,7 +21,7 @@ class RESTAPIView(APIView):
             api = {'title': res[0][0],'api': apis[i], 'description': res[0][1]}
             list_api_param.append(api)
             ff = {'apis': list_api_param}
-        return Response(json.dumps(ff), content_type="application/json")
+        return Response(ff)
 
 
 class RESTAPIView2(APIView):
@@ -29,16 +29,19 @@ class RESTAPIView2(APIView):
         task_id = request.data['task_id']
         user_id = request.data['user_id']
         some_api = request.data['insides']
+        print(some_api)
         list_api_param = []
         for i in range(len(some_api)):
-            param = connect_with_sql.get_param(i + 1)
-            title = connect_with_sql.get_title(i + 1)
+            id = connect_with_sql.getID(some_api[i])
+            print(id)
+            param = connect_with_sql.get_param(id)
+            title = connect_with_sql.get_title(id)
             api = {'title': title[0][0], 'api': some_api[i], 'description': title[0][1]}
             api = {'api': api, 'parameters': param}
             # parameter={'parameters':param}
             list_api_param.append(api)
             ff = {'task_id': task_id, 'user_id': user_id, 'insides': list_api_param}
-        return Response(json.dumps(ff), content_type="application/json")
+        return Response(ff)
 
 class RESTAPIView3(APIView):
     def post(self, request):
@@ -48,11 +51,8 @@ class RESTAPIView3(APIView):
         tasks = request.data['insides']
         for k in range(len(tasks)):
             res = get_web_from_name(tasks[k])  # получил ссылку на отдельный АПИ
-            request_to_shardAPI = Client.one_task(res)  # это я отправляю Антону JSON с ссылкой и параметрами и получаю от него ответ
-            #web_api = connect_with_sql.from_web_to_api(request_to_shardAPI['web'])  # заменяю в ответе Антона ссылку на название АПИ
-            #print('**********')
-            #print(request_to_shardAPI['api'])
+            request_to_shardAPI = Client.one_task(res)  # это отправление JSON с ссылкой и параметрами и получение от него ответ
             response_to_user = {'api': request_to_shardAPI['api'],'data': request_to_shardAPI['parameters']}  # формирую ответ из названия АПИ и его данных
             list_res.append(response_to_user)
             ff = {'task_id': task_id, 'user_id': user_id, 'insides': list_res}
-        return Response(json.dumps(ff), content_type="application/json")
+        return Response(ff)

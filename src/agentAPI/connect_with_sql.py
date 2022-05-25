@@ -34,8 +34,8 @@ import json
 #cur.execute('SELECT * FROM web_api')
 #print(cur.fetchall())
 
-cur.execute('SELECT * FROM param_api')
-print(cur.fetchall())
+#cur.execute('SELECT * FROM param_api')
+#print(cur.fetchall())
 
 def get_API():
     conn = sqlite3.connect('db.sqlite3')
@@ -53,7 +53,6 @@ def get_title(id):
     cur.execute("""SELECT title_api, description FROM backed_api_apiweb
             WHERE id=?;""", (str(id)))
     res = cur.fetchall()
-    #print(res)
     return res
 
 def get_web(name_api):
@@ -95,6 +94,20 @@ def get_param(id_api):
         #print(res[i][0]+": "+res[i][1])
 
     return list_param
+
+def getID(name):
+    conn = sqlite3.connect('db.sqlite3')
+    cur = conn.cursor()
+    list_api = []
+    cur.execute("SELECT name_api FROM backed_api_apiweb;")
+    res = cur.fetchall()
+    print(res)
+    for i in range(len(res)):
+        list_api.append(res[i])
+    for i in range(len(list_api)):
+        if list_api[i][0] == name:
+            return (i+1)
+    return 'no data'
 
 
 def get_xhost(name_api):
