@@ -1,0 +1,163 @@
+{
+	"request":"get_data",
+    "task_id" : "1123123",
+	"user_id": "2312421",
+	"tasks": [
+		{
+			"api": "weatherAPI",
+			"parameters" : [
+				{"date": "12/12/12"}
+            ]
+		},
+		{
+			"api": "COVID_API",
+			"parameters" : [
+				{"date": "12/12/12"}
+            ]
+		}
+	]
+}
+,
+{
+	"api": [
+		{
+			"api": "weatherAPI",
+			"parametrs" : [
+					{param1: type1},
+					{param2: type2},
+					...
+				]
+		},
+		{
+			"api": "COVID_API",
+			"parametrs" : []
+		}
+	]
+}
+
+
+
+
+
+{
+	"task_id" : "1123123",
+	"tasks": [
+		{
+			"api": "weatherAPI",
+			"parametrs" : {}
+		},
+		{
+			"api": "COVID_API",
+			"parametrs" : {}
+		}
+	]
+}
+
+
+
+
+{
+	"task_id" : "1123123",
+	"task_data": [
+		{
+			"api": "weatherAPI",
+			"data" : {}
+		},
+		{
+			"api": "COVID_API",
+			"data" : {}
+		},
+	]
+}
+
+
+
+{
+	"task_id" : "1123123",
+	"task_data": {
+		"api": "weatherAPI",
+		"api_data" : {}
+	}
+}
+
+
+{
+	"task_id" : "1123123",
+	"task": {
+		"api": "weatherAPI",
+		"parametrs" : {}
+	}
+}
+
+
+{
+	"task_id" : "1123123",
+	"data": {
+		"api": "COVID_API",
+		"api_data" : {}
+	}
+}
+
+
+
+
+
+
+{
+	"task_id" : "1123123",
+	"task": {
+		"api": "COVID_API",
+		"parametrs" : {}
+	}
+}
+
+
+
+
+{
+	"task_id" : "1123123",
+	"data": {
+		"api": "COVID_API",
+		"api_data" : {}
+	}
+}
+
+
+
+
+{
+	"apis": [{
+		"api" : "weatherAPI",
+		"parametrs" : {
+
+		}
+	},
+	{
+		"api": "COVID_API",
+		"parametrs" : {}
+	}]
+}
+
+
+{
+	"request":"get_data",
+    "task_id" : "1123123",
+	"user_id": "2312421",
+	"tasks": [
+		{
+			"api": "weatherAPI",
+			"parameters" : [
+				"date": "12/12/12",
+
+				]
+
+            }
+		},
+		{
+			"api": "COVID_API",
+			"parameters" : {
+                "date": "11/11/11"
+            }
+		}
+	]
+}
